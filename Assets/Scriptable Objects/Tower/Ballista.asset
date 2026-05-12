@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85006c3f4b7bdff47ae954ce9927a845, type: 3}
+  m_Name: Ballista
+  m_EditorClassIdentifier: Assembly-CSharp::TowersData
+  TowersName: Ballista
+  prefab: {fileID: 2379259324889334475, guid: f8f00151fec3831439926ae90f3a4a48, type: 3}
+  WeaponPrefab: {fileID: 255207172683303733, guid: b10275beaa56bd64d8884be721ab18b7, type: 3}
+  buyCost: 0
+  sellValue: 0
+  levels:
+  - enableBase: 1
+    enableBottom: 0
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 2
+    ProjectileSpeed: 0
+  - enableBase: 1
+    enableBottom: 1
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 3
+    ProjectileSpeed: 0
+  - enableBase: 1
+    enableBottom: 1
+    enableMiddle: 1
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 4
+    ProjectileSpeed: 0
+  - enableBase: 1
+    enableBottom: 1
+    enableMiddle: 1
+    enableBuild: 1
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 5
+    ProjectileSpeed: 0
