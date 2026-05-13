@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +14,9 @@ public class TowerPlace : MonoBehaviour {
 
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
+
+    private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
+
 
     public void StartPlacing(TowersData data)
     {
@@ -42,6 +47,13 @@ public class TowerPlace : MonoBehaviour {
                 }
             }
         }
+        originalColors.Clear();
+        foreach (var r in towerPreview.GetComponentsInChildren<Renderer>())
+        {
+            if (r is LineRenderer) continue;
+            originalColors[r] = r.materials.Select(m => m.color).ToArray();
+        }
+
         SetupRangeCircle();
     }
 
@@ -102,7 +114,7 @@ public class TowerPlace : MonoBehaviour {
             SetPreviewColor(isGround);
         }
 
-        if (Keyboard.current.rKey.isPressed)
+        if (Keyboard.current.eKey.isPressed)
         {
             towerPreview.transform.Rotate(0f, 90f * Time.deltaTime, 0);
         }
@@ -110,6 +122,22 @@ public class TowerPlace : MonoBehaviour {
         if (Keyboard.current.qKey.isPressed)
         {
             towerPreview.transform.Rotate(0f, -90f * Time.deltaTime, 0);
+        }
+
+        if (Mouse.current.leftButton.wasPressedThisFrame && isOnGround)
+        {
+            foreach (var r in towerPreview.GetComponentsInChildren<Renderer>())
+            {
+                if (r is LineRenderer) continue;
+                if (originalColors.TryGetValue(r, out Color[] colors))
+                    for (int i = 0; i < r.materials.Length; i++)
+                        r.materials[i].color = colors[i];
+            }
+
+            towerPreview.GetComponentsInChildren<WeaponBase>().ToList().ForEach(wb => wb.enabled = true);
+            towerPreview.GetComponentsInChildren<WeaponAttack>().ToList().ForEach(wa => wa.enabled = true);
+            towerPreview = null;
+            isPlacing = false;
         }
     }
 }
