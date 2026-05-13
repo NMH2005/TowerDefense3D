@@ -92,21 +92,24 @@ public class TowerPlace : MonoBehaviour {
 
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             towerPreview.transform.position = hit.point;
-            SetPreviewColor(true);
-            Debug.Log("On ground: " + hit.point);
+
+            bool isGround =
+                ((1 << hit.collider.gameObject.layer) & groundLayer) != 0;
+
+            SetPreviewColor(isGround);
         }
-        else if (Physics.Raycast(ray, out RaycastHit hitAny, Mathf.Infinity))
+
+        if (Keyboard.current.rKey.isPressed)
         {
-            towerPreview.transform.position = hitAny.point;
-            SetPreviewColor(false);
-            Debug.Log("Not on ground, hit: " + hitAny.collider.gameObject.name + " layer: " + hitAny.collider.gameObject.layer);
+            towerPreview.transform.Rotate(0f, 90f * Time.deltaTime, 0);
         }
-        else
+
+        if (Keyboard.current.qKey.isPressed)
         {
-            Debug.Log("No hit at all");
+            towerPreview.transform.Rotate(0f, -90f * Time.deltaTime, 0);
         }
     }
 }

@@ -15,6 +15,7 @@ public class WeaponAttack : MonoBehaviour
     private void Update()
     {
         target = weaponBase.GetTarget();
+        Debug.Log($"{gameObject.name} - target: {(target != null ? target.name : "null")} - isAttacking: {isAttacking}");
 
         if (target != null && !isAttacking)
         {
