@@ -17,4 +17,44 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 8375867773450231619, guid: 5739ca3f03d635740a3ccdf3944ee7ea, type: 3}
   buyCost: 0
   sellValue: 0
-  levels: []
+  levels:
+  - enableBase: 1
+    enableBottom: 0
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 150
+    Damage: 5
+    FireRate: 3
+    Range: 30
+    ProjectileSpeed: 0
+  - enableBase: 0
+    enableBottom: 0
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 0
+    ProjectileSpeed: 0
+  - enableBase: 0
+    enableBottom: 0
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 0
+    ProjectileSpeed: 0
+  - enableBase: 0
+    enableBottom: 0
+    enableMiddle: 0
+    enableBuild: 0
+    UpgradeCost: 0
+    MaxHp: 0
+    Damage: 0
+    FireRate: 0
+    Range: 0
+    ProjectileSpeed: 0

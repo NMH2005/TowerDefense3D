@@ -23,9 +23,9 @@ MonoBehaviour:
     enableMiddle: 0
     enableBuild: 0
     UpgradeCost: 0
-    MaxHp: 0
-    Damage: 0
-    FireRate: 0
+    MaxHp: 100
+    Damage: 5
+    FireRate: 2
     Range: 2
     ProjectileSpeed: 0
   - enableBase: 1
