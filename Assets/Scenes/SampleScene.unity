@@ -680,67 +680,6 @@ RectTransform:
   m_AnchoredPosition: {x: -28, y: -48}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &118665037
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 497396403834166862, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: range
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.000000382111
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 41.79276
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 600508598081084198, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542761494088080906, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-      propertyPath: m_Name
-      value: weapon-catapult
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
 --- !u!1 &119402115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1140,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  blockedLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &243152581
 Transform:
   m_ObjectHideFlags: 0
@@ -10137,6 +10079,5 @@ SceneRoots:
   - {fileID: 1727317470}
   - {fileID: 543450652310111557}
   - {fileID: 1478361326}
-  - {fileID: 118665037}
   - {fileID: 340761451}
   - {fileID: 1643470734}
