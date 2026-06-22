@@ -24,6 +24,23 @@ public class TowerStatPanel : MonoBehaviour
         });
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnTowerPlaced += Hide;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnTowerPlaced -= Hide;
+    }
+
+
+    private void Hide()
+    {
+        if (!gameObject.activeSelf) return;
+        uiStatsManager.OnPanelClosed();
+        gameObject.SetActive(false);
+    }
 
     public void Show()
     {
@@ -36,5 +53,4 @@ public class TowerStatPanel : MonoBehaviour
         buyCost.text = $"Cost: {towerData.buyCost}";
         gameObject.SetActive(true);
     }
-
 }

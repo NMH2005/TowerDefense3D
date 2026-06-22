@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8975584524258265762}
   - component: {fileID: 2182731243516354966}
+  - component: {fileID: 3596699573535352631}
   m_Layer: 0
   m_Name: Tower-Weapon
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2836476217834696546}
@@ -52,6 +53,29 @@ MonoBehaviour:
   bottomPrefab: {fileID: 6379286408264477782}
   middlePrefab: {fileID: 6426195740849271136}
   buildPrefab: {fileID: 3180247430728573315}
+--- !u!136 &3596699573535352631
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2379259324889334475}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!1001 &1600908904930115768
 PrefabInstance:
   m_ObjectHideFlags: 0

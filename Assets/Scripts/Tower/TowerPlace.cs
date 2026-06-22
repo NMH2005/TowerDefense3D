@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class TowerPlace : MonoBehaviour {
     [SerializeField] private LayerMask groundLayer;
-
+    [SerializeField] private LayerMask blockedLayers;
+  
     private GameObject towerPreview;
     private LineRenderer rangeCircle;
     private float currentRange;
@@ -16,7 +18,6 @@ public class TowerPlace : MonoBehaviour {
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
 
     private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
-
 
     public void StartPlacing(TowersData data)
     {
@@ -104,14 +105,24 @@ public class TowerPlace : MonoBehaviour {
 
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            SetPreviewColor(false);
+        }
+        else if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
             towerPreview.transform.position = hit.point;
 
-            bool isGround =
-                ((1 << hit.collider.gameObject.layer) & groundLayer) != 0;
+            int towerPlacedLayer = LayerMask.NameToLayer("TowerPlaced");
+            Collider[] overlaps = Physics.OverlapSphere(hit.point, 2f, 1 << towerPlacedLayer);
+            bool hasTower = overlaps.Length > 0;
 
-            SetPreviewColor(isGround);
+            bool isGround = ((1 << hit.collider.gameObject.layer) & groundLayer) != 0;
+            SetPreviewColor(isGround && !hasTower);
+        }
+        else
+        {
+            SetPreviewColor(false);
         }
 
         if (Keyboard.current.eKey.isPressed)
@@ -133,11 +144,19 @@ public class TowerPlace : MonoBehaviour {
                     for (int i = 0; i < r.materials.Length; i++)
                         r.materials[i].color = colors[i];
             }
-
             towerPreview.GetComponentsInChildren<WeaponBase>().ToList().ForEach(wb => wb.enabled = true);
             towerPreview.GetComponentsInChildren<WeaponAttack>().ToList().ForEach(wa => wa.enabled = true);
+            SetLayerRecursively(towerPreview, LayerMask.NameToLayer("TowerPlaced"));
             towerPreview = null;
             isPlacing = false;
+            EventManager.RaiseTowerPlaced();
         }
+    }
+
+    private void SetLayerRecursively(GameObject obj, int layer) 
+    {
+        obj.layer = layer;
+        foreach(Transform child in  obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 }
