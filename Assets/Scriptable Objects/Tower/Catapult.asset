@@ -28,8 +28,8 @@ MonoBehaviour:
     FireRate: 0
     Range: 0
     ProjectileSpeed: 0
-  - enableBase: 0
-    enableBottom: 0
+  - enableBase: 1
+    enableBottom: 1
     enableMiddle: 0
     enableBuild: 0
     UpgradeCost: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
     FireRate: 0
     Range: 0
     ProjectileSpeed: 0
-  - enableBase: 0
-    enableBottom: 0
-    enableMiddle: 0
+  - enableBase: 1
+    enableBottom: 1
+    enableMiddle: 1
     enableBuild: 0
     UpgradeCost: 0
     MaxHp: 0
@@ -48,9 +48,9 @@ MonoBehaviour:
     FireRate: 0
     Range: 0
     ProjectileSpeed: 0
-  - enableBase: 0
-    enableBottom: 0
-    enableMiddle: 0
+  - enableBase: 1
+    enableBottom: 1
+    enableMiddle: 1
     enableBuild: 0
     UpgradeCost: 0
     MaxHp: 0

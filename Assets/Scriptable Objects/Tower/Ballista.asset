@@ -26,7 +26,7 @@ MonoBehaviour:
     MaxHp: 100
     Damage: 5
     FireRate: 2
-    Range: 2
+    Range: 20
     ProjectileSpeed: 0
   - enableBase: 1
     enableBottom: 1
