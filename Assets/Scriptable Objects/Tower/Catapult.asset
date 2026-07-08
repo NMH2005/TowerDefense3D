@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Catapult
   m_EditorClassIdentifier: Assembly-CSharp::TowersData
   TowersName: Catapult
+  Icon: {fileID: 21300000, guid: a6458545a5e670647894895d13743839, type: 3}
   prefab: {fileID: 2379259324889334475, guid: f8f00151fec3831439926ae90f3a4a48, type: 3}
   WeaponPrefab: {fileID: 7542761494088080906, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
   buyCost: 0

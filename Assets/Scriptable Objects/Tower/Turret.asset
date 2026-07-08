@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Turret
   m_EditorClassIdentifier: Assembly-CSharp::TowersData
   TowersName: Turret
+  Icon: {fileID: 21300000, guid: 6498de2345863534fbbfdad21290449d, type: 3}
   prefab: {fileID: 2379259324889334475, guid: f8f00151fec3831439926ae90f3a4a48, type: 3}
   WeaponPrefab: {fileID: 2217576651455496023, guid: f02d431fcd9994e4f97aced31d13c0ef, type: 3}
   buyCost: 0

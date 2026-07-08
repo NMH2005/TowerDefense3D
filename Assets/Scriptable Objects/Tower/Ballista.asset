@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ballista
   m_EditorClassIdentifier: Assembly-CSharp::TowersData
   TowersName: Ballista
+  Icon: {fileID: 21300000, guid: 85da2608e80baa0448638e207b33b229, type: 3}
   prefab: {fileID: 2379259324889334475, guid: f8f00151fec3831439926ae90f3a4a48, type: 3}
   WeaponPrefab: {fileID: 255207172683303733, guid: b10275beaa56bd64d8884be721ab18b7, type: 3}
   buyCost: 0

@@ -14,11 +14,13 @@ public class TowerPlace : MonoBehaviour {
     private bool isPlacing = false;
     private bool isOnGround = false;
 
+    public bool IsPlacing => isPlacing;
+
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
 
-    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);
-    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f);
+    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);   
+    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f); 
 
     private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
 
