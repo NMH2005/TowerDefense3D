@@ -11649,7 +11649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2133058502
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11710,6 +11710,7 @@ MonoBehaviour:
   CDCurrentText: {fileID: 1875538538}
   CDNextText: {fileID: 338793007}
   upgradeButton: {fileID: 2010075604}
+  upgradeText: {fileID: 1757744944}
 --- !u!4 &543450652310111557
 Transform:
   m_ObjectHideFlags: 0
