@@ -17,6 +17,9 @@ public class TowerPlace : MonoBehaviour {
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
 
+    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);
+    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f);
+
     private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
 
     public void StartPlacing(TowersData data)
@@ -90,13 +93,15 @@ public class TowerPlace : MonoBehaviour {
     void SetPreviewColor(bool valid)
     {
         isOnGround = valid;
-        Color color = valid ? validColor : invalidColor;
-        rangeCircle.startColor = color;
-        rangeCircle.endColor = color;
+        Color modelColor = valid ? validColor : invalidColor;
+        Color rangeColor = valid ? rangeValidColor : rangeInvalidColor;
+
+        rangeCircle.startColor = rangeColor;
+        rangeCircle.endColor = rangeColor;
 
         foreach (var renderer in towerPreview.GetComponentsInChildren<Renderer>())
             foreach (var mat in renderer.materials)
-                mat.color = color;
+                mat.color = modelColor;
     }
 
     void Update()
