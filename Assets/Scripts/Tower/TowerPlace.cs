@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class TowerPlace : MonoBehaviour {
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask blockedLayers;
-  
+
     private GameObject towerPreview;
     private LineRenderer rangeCircle;
     private float currentRange;
@@ -29,10 +29,6 @@ public class TowerPlace : MonoBehaviour {
         currentRange = data.levels[0].Range;
         towerPreview = Instantiate(data.prefab);
 
-        TowerManager towerManager = towerPreview.GetComponent<TowerManager>();
-        if (towerManager != null)
-            towerManager.ApplyLevel(data.levels[0]);
-
         if (data.WeaponPrefab != null)
         {
             foreach (var weaponPlace in towerPreview.GetComponentsInChildren<Transform>())
@@ -48,6 +44,10 @@ public class TowerPlace : MonoBehaviour {
                 }
             }
         }
+
+        TowerManager towerManager = towerPreview.GetComponent<TowerManager>();
+        if (towerManager != null)
+            towerManager.Initialize(data, 0);
         originalColors.Clear();
         foreach (var r in towerPreview.GetComponentsInChildren<Renderer>())
         {
@@ -153,10 +153,10 @@ public class TowerPlace : MonoBehaviour {
         }
     }
 
-    private void SetLayerRecursively(GameObject obj, int layer) 
+    private void SetLayerRecursively(GameObject obj, int layer)
     {
         obj.layer = layer;
-        foreach(Transform child in  obj.transform)
+        foreach (Transform child in obj.transform)
             SetLayerRecursively(child.gameObject, layer);
     }
 }

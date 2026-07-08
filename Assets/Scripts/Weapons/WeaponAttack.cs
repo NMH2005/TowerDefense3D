@@ -1,13 +1,18 @@
 using UnityEngine;
 
-public class WeaponAttack : MonoBehaviour
-{
+public class WeaponAttack : MonoBehaviour {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private WeaponBase weaponBase;
     [SerializeField] private Transform firePoint;
     private Animator animator;
     private Transform target;
     private bool isAttacking;
+
+    private int damage;
+    private float fireRate = 1f; 
+    private float projectileSpeed;
+    private float cooldownTimer;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -15,18 +20,28 @@ public class WeaponAttack : MonoBehaviour
     private void Update()
     {
         target = weaponBase.GetTarget();
-        Debug.Log($"{gameObject.name} - target: {(target != null ? target.name : "null")} - isAttacking: {isAttacking}");
 
-        if (target != null && !isAttacking)
+        if (cooldownTimer > 0f)
+            cooldownTimer -= Time.deltaTime;
+
+        if (target != null && !isAttacking && cooldownTimer <= 0f)
         {
             animator.SetTrigger("Attack");
             isAttacking = true;
         }
     }
 
+    public void ApplyStats(TowerLevelData levelData)
+    {
+        damage = levelData.Damage;
+        fireRate = levelData.FireRate;
+        projectileSpeed = levelData.ProjectileSpeed;
+    }
+
     public void OnShoot()
     {
         isAttacking = false;
+        cooldownTimer = fireRate > 0f ? 1f / fireRate : 0f;
         SpawnBullet(projectilePrefab);
     }
 

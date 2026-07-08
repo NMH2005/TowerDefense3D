@@ -30,6 +30,11 @@ public class WeaponBase : MonoBehaviour {
         return target;
     }
 
+    public void ApplyStats(TowerLevelData levelData)
+    {
+        range = levelData.Range;
+    }
+
     private void GetFirstTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
