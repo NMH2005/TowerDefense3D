@@ -13,7 +13,14 @@ public class TowerManager : MonoBehaviour {
     public int CurrentLevelIndex { get; private set; }
     public TowerLevelData CurrentLevelData { get; private set; }
 
+    private GameObject weaponInstance;
+
     public event Action<TowerLevelData> OnLevelApplied;
+
+    public void RegisterWeapon(GameObject weapon)
+    {
+        weaponInstance = weapon;
+    }
 
     public void Initialize(TowersData data, int startLevelIndex = 0)
     {
@@ -31,14 +38,45 @@ public class TowerManager : MonoBehaviour {
 
         CurrentLevelData = levelData;
 
+        RepositionWeapon();
+
         foreach (var weapon in GetComponentsInChildren<WeaponAttack>())
             weapon.ApplyStats(levelData);
 
         foreach (var wb in GetComponentsInChildren<WeaponBase>())
             wb.ApplyStats(levelData);
 
-
         OnLevelApplied?.Invoke(levelData);
+    }
+
+    private void RepositionWeapon()
+    {
+        if (weaponInstance == null) return;
+
+        Transform activePlace = FindActiveWeaponPlace();
+        if (activePlace == null) return;
+
+        weaponInstance.transform.SetParent(activePlace, false);
+        weaponInstance.transform.localPosition = Vector3.zero;
+        weaponInstance.transform.localRotation = Quaternion.identity;
+    }
+
+    private Transform FindActiveWeaponPlace()
+    {
+
+        GameObject[] partsHighToLow = { buildPrefab, middlePrefab, bottomPrefab, basePrefab };
+
+        foreach (var part in partsHighToLow)
+        {
+            if (part == null || !part.activeInHierarchy) continue;
+
+            foreach (var t in part.GetComponentsInChildren<Transform>(true))
+            {
+                if (t.name == "WeaponPlace")
+                    return t;
+            }
+        }
+        return null;
     }
 
     public bool HasNextLevel => towerData != null && CurrentLevelIndex + 1 < towerData.levels.Length;
@@ -47,7 +85,6 @@ public class TowerManager : MonoBehaviour {
     {
         return HasNextLevel ? towerData.levels[CurrentLevelIndex + 1] : null;
     }
-
 
     public bool TryUpgrade()
     {

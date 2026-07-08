@@ -14,6 +14,7 @@ public class TowerUIPanel : MonoBehaviour {
     [SerializeField] private TMP_Text CDCurrentText;
     [SerializeField] private TMP_Text CDNextText;
     [SerializeField] private Button upgradeButton;
+    [SerializeField] private TMP_Text upgradeText;   
 
     private TowerManager currentTower;
 
@@ -60,7 +61,11 @@ public class TowerUIPanel : MonoBehaviour {
 
         SetPair(CDCurrentText, CDNextText, hasNext, GetCooldown(current).ToString("0.00"), hasNext ? GetCooldown(next).ToString("0.00") : null);
 
-        if (upgradeButton != null) upgradeButton.gameObject.SetActive(hasNext);
+        if (upgradeButton != null)
+            upgradeButton.interactable = hasNext;
+
+        if (upgradeText != null)
+            upgradeText.text = hasNext ? "Upgrade" : "Max";
     }
 
     private float GetCooldown(TowerLevelData levelData)

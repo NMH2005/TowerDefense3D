@@ -19,8 +19,8 @@ public class TowerPlace : MonoBehaviour {
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
 
-    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);   
-    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f); 
+    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);
+    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f);
 
     private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
 
@@ -33,24 +33,20 @@ public class TowerPlace : MonoBehaviour {
         isOnGround = false;
         currentRange = data.levels[0].Range;
         towerPreview = Instantiate(data.prefab);
+        TowerManager towerManager = towerPreview.GetComponent<TowerManager>();
 
         if (data.WeaponPrefab != null)
         {
-            foreach (var weaponPlace in towerPreview.GetComponentsInChildren<Transform>())
-            {
-                if (weaponPlace.name == "WeaponPlace" && weaponPlace.gameObject.activeInHierarchy)
-                {
-                    GameObject weaponPreview = Instantiate(data.WeaponPrefab, weaponPlace);
-                    foreach (var wb in weaponPreview.GetComponentsInChildren<WeaponBase>())
-                        wb.enabled = false;
-                    foreach (var wa in weaponPreview.GetComponentsInChildren<WeaponAttack>())
-                        wa.enabled = false;
-                    break;
-                }
-            }
+            GameObject weaponPreview = Instantiate(data.WeaponPrefab, towerPreview.transform);
+            foreach (var wb in weaponPreview.GetComponentsInChildren<WeaponBase>())
+                wb.enabled = false;
+            foreach (var wa in weaponPreview.GetComponentsInChildren<WeaponAttack>())
+                wa.enabled = false;
+
+            if (towerManager != null)
+                towerManager.RegisterWeapon(weaponPreview);
         }
 
-        TowerManager towerManager = towerPreview.GetComponent<TowerManager>();
         if (towerManager != null)
             towerManager.Initialize(data, 0);
         originalColors.Clear();
