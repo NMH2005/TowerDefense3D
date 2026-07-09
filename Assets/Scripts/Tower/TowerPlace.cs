@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ public class TowerPlace : MonoBehaviour {
     private bool isPlacing = false;
     private bool isOnGround = false;
 
+    private TowersData currentData;
     public bool IsPlacing => isPlacing;
 
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
@@ -26,9 +28,13 @@ public class TowerPlace : MonoBehaviour {
 
     public void StartPlacing(TowersData data)
     {
+        if (EconomyManager.Instance != null && !EconomyManager.Instance.CanAfford(data.buyCost))
+            return;
+
         if (towerPreview != null)
             Destroy(towerPreview);
 
+        currentData = data;
         isPlacing = true;
         isOnGround = false;
         currentRange = data.levels[0].Range;
@@ -140,6 +146,13 @@ public class TowerPlace : MonoBehaviour {
 
         if (Mouse.current.leftButton.wasPressedThisFrame && isOnGround)
         {
+            if(EconomyManager.Instance != null && !EconomyManager.Instance.TrySpend(currentData.buyCost))
+            {
+                return;
+            }
+
+
+
             foreach (var r in towerPreview.GetComponentsInChildren<Renderer>())
             {
                 if (r is LineRenderer) continue;
@@ -153,6 +166,7 @@ public class TowerPlace : MonoBehaviour {
             towerPreview = null;
             isPlacing = false;
             EventManager.RaiseTowerPlaced();
+            
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,10 @@ public class TowerUIPanel : MonoBehaviour {
     [SerializeField] private TMP_Text CDCurrentText;
     [SerializeField] private TMP_Text CDNextText;
     [SerializeField] private Button upgradeButton;
-    [SerializeField] private TMP_Text upgradeText;   
+    [SerializeField] private Button sellButton;
+    [SerializeField] private TMP_Text sellText;
+    [SerializeField] private TMP_Text upgradeText;
+    [SerializeField] private TMP_Text upgradeCostText;
 
     private TowerManager currentTower;
 
@@ -25,6 +29,26 @@ public class TowerUIPanel : MonoBehaviour {
         {
             upgradeButton.onClick.AddListener(OnUpgradeClicked);
         }
+
+        if(sellButton != null)
+        {
+            sellButton.onClick.AddListener(OnSellClicked);
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.OnGoldChanged += OnGoldChanged;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnGoldChanged -= OnGoldChanged;
+    }
+
+    private void OnGoldChanged(int gold)
+    {
+        Refresh();
     }
 
     public void Show(TowerManager tower)
@@ -38,7 +62,7 @@ public class TowerUIPanel : MonoBehaviour {
     public void Hide()
     {
         currentTower = null;
-        gameObject?.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void Refresh()
@@ -61,11 +85,16 @@ public class TowerUIPanel : MonoBehaviour {
 
         SetPair(CDCurrentText, CDNextText, hasNext, GetCooldown(current).ToString("0.00"), hasNext ? GetCooldown(next).ToString("0.00") : null);
 
+        bool canAfford = hasNext && (EconomyManager.Instance == null || EconomyManager.Instance.CanAfford(next.UpgradeCost));
+
         if (upgradeButton != null)
-            upgradeButton.interactable = hasNext;
+            upgradeButton.interactable = canAfford;
 
         if (upgradeText != null)
-            upgradeText.text = hasNext ? "Upgrade" : "Max";
+            upgradeText.text = hasNext ? $"Upgrade: ${next.UpgradeCost}" : "Max";
+
+        if (sellText != null)
+            sellText.text = $"Sell: ${current.SellValue}";
     }
 
     private float GetCooldown(TowerLevelData levelData)
@@ -90,6 +119,27 @@ public class TowerUIPanel : MonoBehaviour {
     {
         if (currentTower == null || !currentTower.HasNextLevel) return;
 
+        int cost = currentTower.GetNextLevelData().UpgradeCost;
+        if (EconomyManager.Instance != null && !EconomyManager.Instance.TrySpend(cost))
+        {
+            return;
+        }
+
         if (currentTower.TryUpgrade()) Refresh();
+    }
+
+    private void OnSellClicked()
+    {
+        if (currentTower == null || currentTower.CurrentLevelData == null) return;
+        int sellValue = currentTower.CurrentLevelData.SellValue;
+
+        if(EconomyManager.Instance != null)
+        {
+            EconomyManager.Instance.AddGold(sellValue);
+        }
+
+        EventManager.RaiseTowerSold(currentTower);
+        Destroy(currentTower.gameObject);
+        Hide();
     }
 }

@@ -7,6 +7,7 @@ public class TowerLevelData
     public bool enableMiddle;
     public bool enableBuild;
     public int UpgradeCost;
+    public int SellValue;
     public int MaxHp;
     public int Damage;
     public float FireRate;

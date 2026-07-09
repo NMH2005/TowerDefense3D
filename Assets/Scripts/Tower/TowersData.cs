@@ -14,7 +14,6 @@ public class TowersData : ScriptableObject
 
     [Header("Cost")]
     public int buyCost;
-    public int sellValue;
 
     [Header("Levels")]
     public TowerLevelData[] levels;

@@ -15,8 +15,6 @@ public class TowerManager : MonoBehaviour {
 
     private GameObject weaponInstance;
 
-    public event Action<TowerLevelData> OnLevelApplied;
-
     public void RegisterWeapon(GameObject weapon)
     {
         weaponInstance = weapon;
@@ -46,7 +44,7 @@ public class TowerManager : MonoBehaviour {
         foreach (var wb in GetComponentsInChildren<WeaponBase>())
             wb.ApplyStats(levelData);
 
-        OnLevelApplied?.Invoke(levelData);
+        EventManager.RaiseLevelApplied(this, levelData);
     }
 
     private void RepositionWeapon()
