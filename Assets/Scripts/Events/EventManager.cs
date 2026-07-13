@@ -9,6 +9,10 @@ public class EventManager : MonoBehaviour
     public static event Action<TowerManager> OnTowerSold;
     public static event Action<TowerManager, TowerLevelData> OnLevelApplied;
     public static event Action<int> OnGoldChanged;
+    public static event Action<EnemyManager> OnEnemyKilled;
+    public static event Action<EnemyManager> OnEnemyReachedEnd;
+    public static event Action<int> OnLivesChanged;
+    public static event Action OnGameOver;
     public static void RaiseTowerPlaced( )
     {
         OnTowerPlaced?.Invoke();
@@ -32,5 +36,25 @@ public class EventManager : MonoBehaviour
     public static void RaiseTowerSold(TowerManager tower)
     {
         OnTowerSold?.Invoke(tower);
+    }
+
+    public static void RaiseEnemyKilled(EnemyManager enemy)
+    {
+        OnEnemyKilled?.Invoke(enemy);
+    }
+
+    public static void RaiseEnemyReachedEnd(EnemyManager enemy)
+    {
+        OnEnemyReachedEnd?.Invoke(enemy);
+    }
+
+    public static void RaiseLivesChanged(int lives)
+    {
+        OnLivesChanged?.Invoke(lives);
+    }
+
+    public static void RaiseGameOver()
+    {
+        OnGameOver?.Invoke();
     }
 }

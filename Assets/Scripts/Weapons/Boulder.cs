@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class Boulder : Ammo {
-    [SerializeField] private float speed = 5f;
     [SerializeField] private float arcHeight = 5f;
 
     private Vector3 startPos;
@@ -14,8 +13,11 @@ public class Boulder : Ammo {
 
     private void Update()
     {
-        if (target == null) return;
-
+        if (target == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         MoveToTarget();
     }
 

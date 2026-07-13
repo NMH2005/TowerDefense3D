@@ -6,6 +6,7 @@ public class WeaponAttack : MonoBehaviour {
     [SerializeField] private Transform firePoint;
     private Animator animator;
     private Transform target;
+    private Transform attackTarget;
     private bool isAttacking;
 
     private int damage;
@@ -19,15 +20,21 @@ public class WeaponAttack : MonoBehaviour {
     }
     private void Update()
     {
-        target = weaponBase.GetTarget();
-
         if (cooldownTimer > 0f)
             cooldownTimer -= Time.deltaTime;
 
-        if (target != null && !isAttacking && cooldownTimer <= 0f)
+
+        if (!isAttacking)
         {
-            animator.SetTrigger("Attack");
-            isAttacking = true;
+            target = weaponBase.GetTarget();
+
+            if (target != null && cooldownTimer <= 0f)
+            {
+                attackTarget = target; 
+
+                animator.SetTrigger("Attack");
+                isAttacking = true;
+            }
         }
     }
 
@@ -57,6 +64,8 @@ public class WeaponAttack : MonoBehaviour {
         {
             ammo.SetTarget(target);
             ammo.SetDirection(dir);
+            ammo.SetDamage(damage);
+            ammo.SetSpeed(projectileSpeed);
         }
 
     }
