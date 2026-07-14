@@ -1,34 +1,44 @@
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private int maxHp = 10;
-    [SerializeField] private int goldReward = 5;
-    [SerializeField] private int damageToBase = 1;
-
+public class EnemyManager : MonoBehaviour, IDamagable {
+    private EnemyData data;
     private int currentHp;
     private Transform target;
     private int currentIndex = 0;
     private bool isDead = false;
+    private bool isAttackingBase = false;
 
-    public int MaxHp => maxHp;
+    private GameObject weaponInstance;
+    private EnemyWeaponAttack weaponAttack;
+
+    public int MaxHp => data != null ? data.MaxHp : 0;
     public int CurrentHp => currentHp;
-    public int DamageToBase => damageToBase;
 
+    
+    public void Initialize(EnemyData enemyData)
+    {
+        data = enemyData;
+        currentHp = data.MaxHp;
+
+        weaponAttack = GetComponentInChildren<EnemyWeaponAttack>();
+        if (weaponAttack != null)
+            weaponAttack.ApplyStats(data);
+    }
     private void Start()
     {
-        currentHp = maxHp;
         target = Waypoints.waypoints[0];
     }
 
     private void Update()
     {
-        if (isDead) return;
+        if (isDead || isAttackingBase) return;
         MoveToWaypoint();
     }
 
     private void MoveToWaypoint()
     {
+        float speed = data != null ? data.Speed : 5f;
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, target.position) <= 0.1f)
@@ -43,11 +53,21 @@ public class EnemyManager : MonoBehaviour {
 
         if (currentIndex >= Waypoints.waypoints.Length)
         {
-            ReachEnd();
+            StartAttackingBase();
             return;
         }
 
         target = Waypoints.waypoints[currentIndex];
+    }
+
+    private void StartAttackingBase()
+    {
+        isAttackingBase = true;
+
+        EventManager.RaiseEnemyReachedEnd(this);
+
+        if (weaponAttack != null)
+            weaponAttack.StartAttacking();
     }
 
     public void TakeDamage(int amount)
@@ -64,19 +84,10 @@ public class EnemyManager : MonoBehaviour {
         if (isDead) return;
         isDead = true;
 
-        if (EconomyManager.Instance != null)
-            EconomyManager.Instance.AddGold(goldReward);
+        if (EconomyManager.Instance != null && data != null)
+            EconomyManager.Instance.AddGold(data.GoldReward);
 
         EventManager.RaiseEnemyKilled(this);
-        Destroy(gameObject);
-    }
-
-    private void ReachEnd()
-    {
-        if (isDead) return;
-        isDead = true;
-
-        EventManager.RaiseEnemyReachedEnd(this);
         Destroy(gameObject);
     }
 }

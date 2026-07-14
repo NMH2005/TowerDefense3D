@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ece921e6e8b25b4bb8e817491ebc34f, type: 3}
+  m_Name: Catapult
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  EnemyName: Catapult
+  prefab: {fileID: 3820799226601165620, guid: eba1e38041067b74bb4d749328ee9da7, type: 3}
+  icon: {fileID: 0}
+  MaxHp: 30
+  Speed: 5
+  Damage: 4
+  FireRate: 1
+  ProjectileSpeed: 50
+  GoldReward: 50

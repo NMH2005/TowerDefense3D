@@ -5,7 +5,7 @@ public abstract class Ammo : MonoBehaviour {
     public Vector3 dir;
 
     protected int damage;
-    protected float speed;
+    protected float speed = 5f;
 
     public void SetTarget(Transform t)
     {
@@ -29,10 +29,10 @@ public abstract class Ammo : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyManager enemy = other.GetComponent<EnemyManager>();
-        if (enemy == null) return;
+        IDamagable damageable = other.GetComponent<IDamagable>();
+        if (damageable == null) return;
 
-        enemy.TakeDamage(damage);
+        damageable.TakeDamage(damage);
         Destroy(gameObject);
     }
 }

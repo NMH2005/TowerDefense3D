@@ -1143,7 +1143,7 @@ MonoBehaviour:
     m_Bits: 8
   blockedLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
 --- !u!4 &243152581
 Transform:
   m_ObjectHideFlags: 0
@@ -11060,7 +11060,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: enemies.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: waypoints.Array.size
@@ -11069,7 +11069,11 @@ PrefabInstance:
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: 'enemies.Array.data[0]'
       value: 
-      objectReference: {fileID: 204362105267464835, guid: 9d5c3f03bfc2cb7459f22821e3c1fb84, type: 3}
+      objectReference: {fileID: 11400000, guid: 49ebddfd5c2816d41bf4ce080423ce43, type: 2}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: 'enemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 64ebff7469e91ea4fa03371f2a7dd3fa, type: 2}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: 'waypoints.Array.data[0]'
       value: 
@@ -12571,6 +12575,10 @@ PrefabInstance:
     - target: {fileID: 2753783761092167926, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762739991932826650, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: maxLives
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7730948708410293227, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: m_Name

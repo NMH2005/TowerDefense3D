@@ -1,7 +1,6 @@
 using UnityEngine;
 
-
-public class PlayerBase : MonoBehaviour {
+public class PlayerBase : MonoBehaviour, IDamagable {
     public static PlayerBase Instance { get; private set; }
 
     [SerializeField] private int maxLives = 20;
@@ -22,28 +21,12 @@ public class PlayerBase : MonoBehaviour {
         Lives = maxLives;
     }
 
-    private void OnEnable()
-    {
-        EventManager.OnEnemyReachedEnd += HandleEnemyReachedEnd;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnEnemyReachedEnd -= HandleEnemyReachedEnd;
-    }
-
     private void Start()
     {
         EventManager.RaiseLivesChanged(Lives);
     }
 
-    private void HandleEnemyReachedEnd(EnemyManager enemy)
-    {
-        if (IsGameOver) return;
-        TakeDamage(enemy.DamageToBase);
-    }
-
-    private void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         if (IsGameOver) return;
 

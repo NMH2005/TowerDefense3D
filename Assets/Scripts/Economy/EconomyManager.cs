@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class EconomyManager : MonoBehaviour
-{
+public class EconomyManager : MonoBehaviour {
     public static EconomyManager Instance { get; private set; }
 
     [SerializeField] private int startingGold = 200;
 
-    public int gold {  get; private set; }
+    public int gold { get; private set; }
     private void Awake()
     {
         Instance = this;
@@ -21,13 +20,13 @@ public class EconomyManager : MonoBehaviour
     public bool CanAfford(int amount)
     {
         return gold >= amount;
-    } 
+    }
 
     public bool TrySpend(int amount)
     {
-        if(!CanAfford(amount)) return false;
+        if (!CanAfford(amount)) return false;
 
-        gold-=amount;
+        gold -= amount;
         EventManager.RaiseGoldChanged(gold);
         return true;
     }
