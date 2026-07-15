@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 3913887088790655040}
   - component: {fileID: 8172784177366407579}
   - component: {fileID: 4138378115441594860}
+  - component: {fileID: 9010211373925608595}
   m_Layer: 0
   m_Name: arrow
   m_TagString: Untagged
@@ -241,3 +242,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeaponAttack
   projectilePrefab: {fileID: 7927500738165265955, guid: 926b68181cc0acd44bdf35715f6809e4, type: 3}
   firePoint: {fileID: 773683048556078897}
+--- !u!95 &9010211373925608595
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334635524829895579}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98f3f380362ec994b9377a23a0be03b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

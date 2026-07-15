@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlotUI : MonoBehaviour
-{
+public class InventorySlotUI : MonoBehaviour {
     [SerializeField] private TowerStatPanel statsPanel;
-    [SerializeField] private UIStatsManager uiStatsManager;
     [SerializeField] private TowersData towerData;
     [SerializeField] private TowerPlace towerPlacer;
     [SerializeField] private Color normalColor = new Color(0f, 0f, 0f, 0.7f);
@@ -12,17 +10,19 @@ public class InventorySlotUI : MonoBehaviour
 
     private Button button;
 
+    public TowersData TowerData => towerData;
+    public TowerStatPanel StatsPanel => statsPanel;
+
     void Awake()
     {
         button = GetComponent<Button>();
-        GetComponent<Button>().onClick.AddListener(OnClick);
+        button.onClick.AddListener(OnClick);
     }
 
     public void OnClick()
     {
-        
+
         towerPlacer.StartPlacing(towerData);
-uiStatsManager.ShowPanel(statsPanel, this);
     }
 
     public void SetSelected(bool selected)

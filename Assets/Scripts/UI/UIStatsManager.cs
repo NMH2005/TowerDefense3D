@@ -1,28 +1,43 @@
 using UnityEngine;
 
 public class UIStatsManager : MonoBehaviour {
-    [SerializeField] private TowerStatPanel[] panels;
     [SerializeField] private InventorySlotUI[] slotButtons;
 
-    private InventorySlotUI currentSelected;
-
-    public void ShowPanel(TowerStatPanel panel, InventorySlotUI caller)
+    private void OnEnable()
     {
-        foreach (var p in panels)
-            p.gameObject.SetActive(false);
-
-        foreach (var b in slotButtons)
-            b.SetSelected(false);
-
-        panel.Show();
-        caller.SetSelected(true);
-        currentSelected = caller;
+        EventManager.OnTowerSelectionChanged += HandleSelectionChanged;
     }
 
-    public void OnPanelClosed()
+    private void OnDisable()
     {
-        if (currentSelected != null)
-            currentSelected.SetSelected(false);
-        currentSelected = null;
+        EventManager.OnTowerSelectionChanged -= HandleSelectionChanged;
+    }
+
+    private void HandleSelectionChanged(TowersData data)
+    {
+        if (data == null)
+        {
+            HideAll();
+            return;
+        }
+
+        foreach (var slot in slotButtons)
+        {
+            if (slot.TowerData != data) continue;
+
+            HideAll();
+            slot.StatsPanel.Show();
+            slot.SetSelected(true);
+            return;
+        }
+    }
+
+    private void HideAll()
+    {
+        foreach (var slot in slotButtons)
+        {
+            slot.StatsPanel.Hide();
+            slot.SetSelected(false);
+        }
     }
 }

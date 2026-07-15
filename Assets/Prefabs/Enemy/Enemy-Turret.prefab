@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 6745884277075271851}
   - component: {fileID: 4676834103197824715}
   - component: {fileID: 6360494923121982866}
+  - component: {fileID: 1324007078453011314}
   m_Layer: 0
-  m_Name: barrel
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +106,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeaponAttack
   projectilePrefab: {fileID: 468820329029695260, guid: 1de734c797fff02469ef66265617f089, type: 3}
   firePoint: {fileID: 129558214971736540}
+--- !u!95 &1324007078453011314
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817310239750193752}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebcac3e33d9dd9b41aad79d94a03cb90, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3297527717867382943
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TowerStatPanel : MonoBehaviour
-{
+public class TowerStatPanel : MonoBehaviour {
     [SerializeField] private TowersData towerData;
     [SerializeField] private TextMeshProUGUI towerName;
     [SerializeField] private TextMeshProUGUI hp;
@@ -12,34 +11,17 @@ public class TowerStatPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fireRange;
     [SerializeField] private TextMeshProUGUI buyCost;
     [SerializeField] private Button closeButton;
-    [SerializeField] private UIStatsManager uiStatsManager;
+    [SerializeField] private TowerPlace towerPlacer;
 
+    public TowersData TowerData => towerData;
 
     void Start()
     {
-        closeButton.onClick.AddListener(() =>
+        if (closeButton != null)
         {
-            uiStatsManager.OnPanelClosed();
-            gameObject.SetActive(false);
-        });
-    }
 
-    private void OnEnable()
-    {
-        EventManager.OnTowerPlaced += Hide;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.OnTowerPlaced -= Hide;
-    }
-
-
-    private void Hide()
-    {
-        if (!gameObject.activeSelf) return;
-        uiStatsManager.OnPanelClosed();
-        gameObject.SetActive(false);
+            closeButton.onClick.AddListener(() => towerPlacer.StopPlacing());
+        }
     }
 
     public void Show()
@@ -52,5 +34,10 @@ public class TowerStatPanel : MonoBehaviour
         fireRange.text = $"Range: {lv.Range:F1}";
         buyCost.text = $"Cost: {towerData.buyCost}";
         gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

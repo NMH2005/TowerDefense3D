@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1997833556367152010}
   - component: {fileID: 5434940536905365348}
   - component: {fileID: 5387908667863125235}
+  - component: {fileID: 8003718913965474634}
   m_Layer: 0
   m_Name: barrel
   m_TagString: Untagged
@@ -105,6 +106,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWeaponAttack
   projectilePrefab: {fileID: 1985630283496282078, guid: d2a2002dd20179e498cce9b7c3bfe834, type: 3}
   firePoint: {fileID: 2993230254227991342}
+--- !u!95 &8003718913965474634
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6664454271450900533}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 255b38193dc92f048be104fd96f6d7e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6688736684858781804
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class EnemyWeaponAttack : MonoBehaviour {
 
         if (!isAttacking && cooldownTimer <= 0f)
         {
-            animator.SetTrigger("Attack");
+            animator.SetTrigger("Shoot");
             isAttacking = true;
         }
     }

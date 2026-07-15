@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,21 +14,29 @@ public class TowerPlace : MonoBehaviour {
     private bool isPlacing = false;
     private bool isOnGround = false;
 
-    private TowersData currentData;
     public bool IsPlacing => isPlacing;
 
     private Color validColor = new Color(0f, 1f, 0f, 0.5f);
     private Color invalidColor = new Color(1f, 0f, 0f, 0.5f);
 
-    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);
-    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f);
+    private Color rangeValidColor = new Color(0f, 0.7f, 1f, 0.9f);   // xanh dương - dễ nhìn trên nền cỏ
+    private Color rangeInvalidColor = new Color(1f, 0.6f, 0f, 0.9f); // cam - dễ nhìn trên nền cỏ
 
     private Dictionary<Renderer, Color[]> originalColors = new Dictionary<Renderer, Color[]>();
 
+    private TowersData currentData;
+
     public void StartPlacing(TowersData data)
     {
-        if (EconomyManager.Instance != null && !EconomyManager.Instance.CanAfford(data.buyCost))
+        // Đang preview đúng loại tower này rồi, bấm lại số đó lần nữa = huỷ preview
+        if (isPlacing && currentData == data)
+        {
+            StopPlacing();
             return;
+        }
+
+        if (EconomyManager.Instance != null && !EconomyManager.Instance.CanAfford(data.buyCost))
+            return; // không đủ tiền, không cho bắt đầu đặt tower
 
         if (towerPreview != null)
             Destroy(towerPreview);
@@ -38,6 +45,7 @@ public class TowerPlace : MonoBehaviour {
         isPlacing = true;
         isOnGround = false;
         currentRange = data.levels[0].Range;
+        EventManager.RaiseTowerSelectionChanged(data);
         towerPreview = Instantiate(data.prefab);
         TowerManager towerManager = towerPreview.GetComponent<TowerManager>();
 
@@ -53,6 +61,8 @@ public class TowerPlace : MonoBehaviour {
                 towerManager.RegisterWeapon(weaponPreview);
         }
 
+        // Initialize sẽ gọi ApplyLevel -> tự đặt weapon vào đúng WeaponPlace
+        // đang active (base/bottom/middle/build), và làm lại mỗi khi upgrade.
         if (towerManager != null)
             towerManager.Initialize(data, 0);
         originalColors.Clear();
@@ -70,6 +80,8 @@ public class TowerPlace : MonoBehaviour {
         if (towerPreview != null)
             Destroy(towerPreview);
         isPlacing = false;
+        currentData = null;
+        EventManager.RaiseTowerSelectionChanged(null);
     }
 
     void SetupRangeCircle()
@@ -126,8 +138,11 @@ public class TowerPlace : MonoBehaviour {
             Collider[] overlaps = Physics.OverlapSphere(hit.point, 2f, 1 << towerPlacedLayer);
             bool hasTower = overlaps.Length > 0;
 
+            Collider[] blockedOverlaps = Physics.OverlapSphere(hit.point, 2f, blockedLayers);
+            bool isBlocked = blockedOverlaps.Length > 0;
+
             bool isGround = ((1 << hit.collider.gameObject.layer) & groundLayer) != 0;
-            SetPreviewColor(isGround && !hasTower);
+            SetPreviewColor(isGround && !hasTower && !isBlocked);
         }
         else
         {
@@ -146,12 +161,8 @@ public class TowerPlace : MonoBehaviour {
 
         if (Mouse.current.leftButton.wasPressedThisFrame && isOnGround)
         {
-            if(EconomyManager.Instance != null && !EconomyManager.Instance.TrySpend(currentData.buyCost))
-            {
-                return;
-            }
-
-
+            if (EconomyManager.Instance != null && !EconomyManager.Instance.TrySpend(currentData.buyCost))
+                return; // không đủ tiền (vd tiền bị tiêu chỗ khác trong lúc đang kéo đặt)
 
             foreach (var r in towerPreview.GetComponentsInChildren<Renderer>())
             {
@@ -165,8 +176,9 @@ public class TowerPlace : MonoBehaviour {
             SetLayerRecursively(towerPreview, LayerMask.NameToLayer("TowerPlaced"));
             towerPreview = null;
             isPlacing = false;
+            currentData = null;
+            EventManager.RaiseTowerSelectionChanged(null);
             EventManager.RaiseTowerPlaced();
-            
         }
     }
 

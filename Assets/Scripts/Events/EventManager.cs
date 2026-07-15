@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour
-{
+public class EventManager : MonoBehaviour {
     public static event Action OnTowerPlaced;
     public static event Action<TowerManager> OnTowerUpgraded;
     public static event Action<TowerManager> OnTowerSold;
@@ -13,7 +12,9 @@ public class EventManager : MonoBehaviour
     public static event Action<EnemyManager> OnEnemyReachedEnd;
     public static event Action<int> OnLivesChanged;
     public static event Action OnGameOver;
-    public static void RaiseTowerPlaced( )
+    public static event Action<TowersData> OnTowerSelectionChanged;
+
+    public static void RaiseTowerPlaced()
     {
         OnTowerPlaced?.Invoke();
     }
@@ -21,6 +22,11 @@ public class EventManager : MonoBehaviour
     public static void RaiseTowerUpgraded(TowerManager tower)
     {
         OnTowerUpgraded?.Invoke(tower);
+    }
+
+    public static void RaiseTowerSold(TowerManager tower)
+    {
+        OnTowerSold?.Invoke(tower);
     }
 
     public static void RaiseLevelApplied(TowerManager tower, TowerLevelData levelData)
@@ -31,11 +37,6 @@ public class EventManager : MonoBehaviour
     public static void RaiseGoldChanged(int gold)
     {
         OnGoldChanged?.Invoke(gold);
-    }
-
-    public static void RaiseTowerSold(TowerManager tower)
-    {
-        OnTowerSold?.Invoke(tower);
     }
 
     public static void RaiseEnemyKilled(EnemyManager enemy)
@@ -56,5 +57,10 @@ public class EventManager : MonoBehaviour
     public static void RaiseGameOver()
     {
         OnGameOver?.Invoke();
+    }
+
+    public static void RaiseTowerSelectionChanged(TowersData data)
+    {
+        OnTowerSelectionChanged?.Invoke(data);
     }
 }
