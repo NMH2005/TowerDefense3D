@@ -41,4 +41,11 @@ public class PlayerBase : MonoBehaviour, IDamagable {
             EventManager.RaiseGameOver();
         }
     }
+
+    [ContextMenu("Test - Take 5 Damage")]
+    private void DebugTakeDamage()
+    {
+        Debug.Log(Lives);
+        TakeDamage(5);
+    }
 }
