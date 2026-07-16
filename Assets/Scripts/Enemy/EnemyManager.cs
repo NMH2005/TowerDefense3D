@@ -1,8 +1,8 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyManager : MonoBehaviour, IDamagable {
     private EnemyData data;
+
     private int currentHp;
     private Transform target;
     private int currentIndex = 0;
@@ -15,16 +15,51 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     public int MaxHp => data != null ? data.MaxHp : 0;
     public int CurrentHp => currentHp;
 
-    
+    public float GetRemainingDistance()
+    {
+        if (target == null) return float.MaxValue;
+
+        float dist = Vector3.Distance(transform.position, target.position);
+
+        for (int i = currentIndex; i < Waypoints.waypoints.Length - 1; i++)
+            dist += Vector3.Distance(Waypoints.waypoints[i].position, Waypoints.waypoints[i + 1].position);
+
+        return dist;
+    }
+
     public void Initialize(EnemyData enemyData)
     {
         data = enemyData;
         currentHp = data.MaxHp;
 
-        weaponAttack = GetComponentInChildren<EnemyWeaponAttack>();
+        if (data.prefab != null)
+            SpawnWeapon(data.prefab);
+    }
+
+    private void SpawnWeapon(GameObject weaponPrefab)
+    {
+        Transform place = FindWeaponPlace();
+        Transform parent = place != null ? place : transform;
+
+        weaponInstance = Instantiate(weaponPrefab, parent);
+        weaponInstance.transform.localPosition = Vector3.zero;
+        weaponInstance.transform.localRotation = Quaternion.identity;
+
+        weaponAttack = weaponInstance.GetComponentInChildren<EnemyWeaponAttack>();
         if (weaponAttack != null)
             weaponAttack.ApplyStats(data);
     }
+
+    private Transform FindWeaponPlace()
+    {
+        foreach (var t in GetComponentsInChildren<Transform>(true))
+        {
+            if (t.name == "WeaponPlace")
+                return t;
+        }
+        return null;
+    }
+
     private void Start()
     {
         target = Waypoints.waypoints[0];

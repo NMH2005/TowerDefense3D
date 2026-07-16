@@ -1,8 +1,11 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour {
     [SerializeField] private float range = 5f;
     [SerializeField] private float turnSpeed = 5f;
+    [SerializeField] private TargetMode targetMode = TargetMode.First;
 
     private Transform target;
 
@@ -10,7 +13,7 @@ public class WeaponBase : MonoBehaviour {
     {
         if (target == null)
         {
-            GetFirstTarget();
+            FindTarget();
             return;
         }
 
@@ -30,30 +33,90 @@ public class WeaponBase : MonoBehaviour {
         return target;
     }
 
+    public void SetTargetMode(TargetMode mode)
+    {
+        targetMode = mode;
+        target = null; 
+    }
+
+    public TargetMode GetTargetMode()
+    {
+        return targetMode;
+    }
+
     public void ApplyStats(TowerLevelData levelData)
     {
         range = levelData.Range;
     }
 
-    private void GetFirstTarget()
+    private void FindTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemyObjs = GameObject.FindGameObjectsWithTag("Enemy");
 
-        float closestDis = Mathf.Infinity;
-        Transform closest = null;
+        List<EnemyManager> inRange = new List<EnemyManager>();
 
-        foreach (var enemy in enemies)
+        foreach (var obj in enemyObjs)
         {
-            float dis = Vector3.Distance(transform.position, enemy.transform.position);
+            float dis = Vector3.Distance(transform.position, obj.transform.position);
+            if (dis > range) continue;
 
-            if (dis < closestDis && dis <= range)
+            EnemyManager enemy = obj.GetComponent<EnemyManager>();
+            if (enemy != null)
+                inRange.Add(enemy);
+        }
+
+        if (inRange.Count == 0)
+        {
+            target = null;
+            return;
+        }
+
+        EnemyManager chosen = SelectByMode(inRange);
+        target = chosen.transform;
+    }
+
+    private EnemyManager SelectByMode(List<EnemyManager> candidates)
+    {
+        switch (targetMode)
+        {
+            case TargetMode.First:
+                return GetBest(candidates, e => e.GetRemainingDistance(), smaller: true);
+
+            case TargetMode.Last:
+                return GetBest(candidates, e => e.GetRemainingDistance(), smaller: false);
+
+            case TargetMode.Strongest:
+                return GetBest(candidates, e => e.CurrentHp, smaller: false);
+
+            case TargetMode.Weakest:
+                return GetBest(candidates, e => e.CurrentHp, smaller: true);
+
+            case TargetMode.Random:
+                return candidates[UnityEngine.Random.Range(0, candidates.Count)];
+
+            default:
+                return candidates[0];
+        }
+    }
+
+    private EnemyManager GetBest(List<EnemyManager> list, Func<EnemyManager, float> selector, bool smaller)
+    {
+        EnemyManager best = list[0];
+        float bestVal = selector(best);
+
+        for (int i = 1; i < list.Count; i++)
+        {
+            float val = selector(list[i]);
+            bool isBetter = smaller ? val < bestVal : val > bestVal;
+
+            if (isBetter)
             {
-                closestDis = dis;
-                closest = enemy.transform;
+                bestVal = val;
+                best = list[i];
             }
         }
 
-        target = closest;
+        return best;
     }
 
     private void LookAtTarget()

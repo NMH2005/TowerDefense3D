@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour {
@@ -61,7 +60,6 @@ public class TowerManager : MonoBehaviour {
 
     private Transform FindActiveWeaponPlace()
     {
-
         GameObject[] partsHighToLow = { buildPrefab, middlePrefab, bottomPrefab, basePrefab };
 
         foreach (var part in partsHighToLow)
@@ -82,6 +80,18 @@ public class TowerManager : MonoBehaviour {
     public TowerLevelData GetNextLevelData()
     {
         return HasNextLevel ? towerData.levels[CurrentLevelIndex + 1] : null;
+    }
+
+    public void SetTargetMode(TargetMode mode)
+    {
+        foreach (var wb in GetComponentsInChildren<WeaponBase>())
+            wb.SetTargetMode(mode);
+    }
+
+    public TargetMode GetTargetMode()
+    {
+        WeaponBase wb = GetComponentInChildren<WeaponBase>();
+        return wb != null ? wb.GetTargetMode() : TargetMode.First;
     }
 
     public bool TryUpgrade()
