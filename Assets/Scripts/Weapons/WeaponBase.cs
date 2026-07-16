@@ -86,10 +86,10 @@ public class WeaponBase : MonoBehaviour {
                 return GetBest(candidates, e => e.GetRemainingDistance(), smaller: false);
 
             case TargetMode.Strongest:
-                return GetBest(candidates, e => e.CurrentHp, smaller: false);
+                return GetBest(candidates, e => e.Damage, smaller: false);
 
             case TargetMode.Weakest:
-                return GetBest(candidates, e => e.CurrentHp, smaller: true);
+                return GetBest(candidates, e => e.Damage, smaller: true);
 
             case TargetMode.Random:
                 return candidates[UnityEngine.Random.Range(0, candidates.Count)];

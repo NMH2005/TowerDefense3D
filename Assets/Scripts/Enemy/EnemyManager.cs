@@ -8,12 +8,14 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     private int currentIndex = 0;
     private bool isDead = false;
     private bool isAttackingBase = false;
+    private int damage;
 
     private GameObject weaponInstance;
     private EnemyWeaponAttack weaponAttack;
 
     public int MaxHp => data != null ? data.MaxHp : 0;
     public int CurrentHp => currentHp;
+    public int Damage => damage;
 
     public float GetRemainingDistance()
     {
@@ -31,6 +33,7 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     {
         data = enemyData;
         currentHp = data.MaxHp;
+        damage = data.Damage;
 
         if (data.prefab != null)
             SpawnWeapon(data.prefab);
