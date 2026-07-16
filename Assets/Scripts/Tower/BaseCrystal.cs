@@ -10,8 +10,17 @@ public class CrystalStage {
     [Tooltip("Đổi màu crystal khi máu base <= % này. Phải LỚN HƠN Break At Hp Percent.")]
     public float crackAtHpPercent = 0.6f;
 
-    [Tooltip("Màu crystal đổi sang khi bị nứt (vd đỏ sậm/xám để báo hiệu sắp vỡ). Không cần thêm model/material nào.")]
+    [Tooltip("Màu crystal đổi sang khi bị nứt (vd đỏ sậm/xám để báo hiệu sắp vỡ). Để trắng/không đổi nếu chỉ muốn dùng đường nứt bên dưới.")]
     public Color crackColor = new Color(0.6f, 0.2f, 0.2f);
+
+    [Tooltip("Số đường nứt vẽ trên MỖI mặt của crystal (tổng số đường = số này x số mặt trên model).")]
+    public int crackLinesPerFace = 1;
+
+    [Tooltip("Độ dài mỗi đường nứt (theo local scale của crystal).")]
+    public float crackLineLength = 0.3f;
+
+    [Tooltip("Đẩy đường nứt ra khỏi bề mặt bao nhiêu để không bị mesh che (thường để rất nhỏ).")]
+    public float crackSurfaceOffset = 0.02f;
 
     [Header("Vỡ")]
     [Range(0f, 1f)]
@@ -38,11 +47,10 @@ public class BaseCrystal : MonoBehaviour {
             if (stage.crystalObject == null) continue;
 
             stage.renderer = stage.crystalObject.GetComponent<Renderer>();
-
             if (stage.renderer != null)
                 stage.originalColor = stage.renderer.material.color;
         }
-    } 
+    }
 
     private void OnEnable()
     {
@@ -78,6 +86,9 @@ public class BaseCrystal : MonoBehaviour {
 
         if (stage.renderer != null)
             stage.renderer.material.color = stage.crackColor;
+
+        ProceduralCrack.SpawnOn(stage.crystalObject, stage.crackLinesPerFace, stage.crackLineLength,
+            Color.black, stage.crackSurfaceOffset);
     }
 
     private void Break(CrystalStage stage)

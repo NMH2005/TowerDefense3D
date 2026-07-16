@@ -12554,6 +12554,22 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[0].crackLineLength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[1].crackLineLength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[2].crackLineLength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[3].crackLineLength
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: stages.Array.data[0].crackAtHpPercent
       value: 0.903
       objectReference: {fileID: 0}
@@ -12572,6 +12588,26 @@ PrefabInstance:
     - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: stages.Array.data[4].crackAtHpPercent
       value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[0].crackLinesPerFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[1].crackLinesPerFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[2].crackLinesPerFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[3].crackLinesPerFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: stages.Array.data[4].crackLinesPerFace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2726295509283080320, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: stages.Array.data[0].shatterEffectPrefab
@@ -12636,6 +12672,14 @@ PrefabInstance:
     - target: {fileID: 4762739991932826650, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: maxLives
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028233361010754536, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028233361010754536, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7730948708410293227, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: m_Name
