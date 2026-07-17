@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     public int MaxHp => maxHp;
     public int CurrentHp => currentHp;
     public int Damage => damage;
+    private SpawnerManager ownerSpawner;
 
     public float GetRemainingDistance()
     {
@@ -33,13 +34,15 @@ public class EnemyManager : MonoBehaviour, IDamagable {
         return dist;
     }
 
-    public void Initialize(EnemyData enemyData, float multiplier, Transform[] path)
+    public void Initialize(EnemyData enemyData, float multiplier, Transform[] path, SpawnerManager spawner)
+
     {
         data = enemyData;
         waypoints = path;
         maxHp = Mathf.RoundToInt(data.MaxHp * multiplier);
         currentHp = maxHp;
         damage = data.Damage;
+        ownerSpawner = spawner;
 
         weaponAttack = GetComponentInChildren<EnemyWeaponAttack>();
         if (weaponAttack != null)
@@ -167,8 +170,7 @@ public class EnemyManager : MonoBehaviour, IDamagable {
             EconomyManager.Instance.AddGold(data.GoldReward);
 
         EventManager.RaiseEnemyKilled(this);
-        FindFirstObjectByType<SpawnerManager>()?.OnEnemyDead();
-
+        ownerSpawner?.OnEnemyDead();
         if (slotIndex != -1)
         {
             BaseAttackSlot.Instance.ReleaseSlot(slotIndex);

@@ -68,8 +68,12 @@ public class SpawnerManager : MonoBehaviour {
         GameObject enemyObj = Instantiate(data.prefab, spawnPos, Quaternion.identity);
         EnemyManager enemyManager = enemyObj.GetComponent<EnemyManager>();
         if (enemyManager != null)
-            enemyManager.Initialize(data, GetHpMultiplier(), waypoints);
-        enemiesSpawnedInWave++;
+            enemyManager.Initialize(
+                data,
+                GetHpMultiplier(),
+                waypoints,
+                this
+            ); enemiesSpawnedInWave++;
         enemiesAlive++;
         if (enemiesSpawnedInWave >= GetEnemiesPerWave())
         {

@@ -4044,7 +4044,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: unlockWave
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: timeInterval
@@ -4055,8 +4055,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: maxEnemiesPerWave
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: enemies.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: enemyIncreasePerWave
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: waypoints.Array.size
@@ -5419,6 +5427,7 @@ GameObject:
   - component: {fileID: 902480197}
   - component: {fileID: 902480199}
   - component: {fileID: 902480200}
+  - component: {fileID: 902480201}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5629,6 +5638,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
   startingGold: 200
+--- !u!114 &902480201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902480196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1431b09a11853488954baeae46d006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndGameUI
+  panel: {fileID: 178969426}
+  titleText: {fileID: 467263443}
 --- !u!1 &923412623
 GameObject:
   m_ObjectHideFlags: 0
@@ -10528,7 +10551,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1636703632}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 902480201}
+        m_TargetAssemblyTypeName: EndGameUI, Assembly-CSharp
+        m_MethodName: BackToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1636703632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12436,12 +12471,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: maxEnemiesPerWave
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: enemies.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: wavesPerTierUnlock
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: enemyIncreasePerWave
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: waypoints.Array.size
@@ -12541,8 +12584,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: maxEnemiesPerWave
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: enemies.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
+      propertyPath: enemyIncreasePerWave
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1034125993880565907, guid: fb1f437913bc1db49bbbdd61928de808, type: 3}
       propertyPath: waypoints.Array.size
@@ -12820,7 +12871,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1931332387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 902480201}
+        m_TargetAssemblyTypeName: EndGameUI, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1931332387
 MonoBehaviour:
   m_ObjectHideFlags: 0
