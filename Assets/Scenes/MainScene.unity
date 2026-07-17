@@ -6716,8 +6716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80155e972e41a9040b53b1eebfc2b11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  baseWaveReward: 20
-  rewardIncreasePerWave: 5
+  baseWaveReward: 50
+  rewardIncreasePerWave: 50
 --- !u!4 &1025922263
 Transform:
   m_ObjectHideFlags: 0
@@ -14554,7 +14554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4762739991932826650, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: maxLives
-      value: 250
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 5028233361010754536, guid: a232c40e455d28c409d1923524bd8e4f, type: 3}
       propertyPath: m_Materials.Array.size
