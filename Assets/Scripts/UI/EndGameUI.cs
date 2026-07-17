@@ -25,14 +25,14 @@ public class EndGameUI : MonoBehaviour {
 
     private void ShowGameOver()
     {
-        titleText.text = "Game Over";
+        titleText.text = "GAMEOVER";
         panel.SetActive(true);
         Time.timeScale = 0f;
     }
 
     private void ShowVictory()
     {
-        titleText.text = "Victory!";
+        titleText.text = "VICTORY!";
         panel.SetActive(true);
         Time.timeScale = 0f;
     }

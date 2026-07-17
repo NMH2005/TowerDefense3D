@@ -15,9 +15,9 @@ MonoBehaviour:
   EnemyName: Ballista
   prefab: {fileID: 4852365652670113621, guid: 2aa0d9ad99fbb1143a126115e3bd14ee, type: 3}
   icon: {fileID: 0}
-  MaxHp: 20
-  Speed: 5
-  Damage: 5
+  MaxHp: 8
+  Speed: 3
+  Damage: 10
   FireRate: 1
   ProjectileSpeed: 50
   GoldReward: 50

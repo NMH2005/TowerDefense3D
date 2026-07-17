@@ -16,8 +16,8 @@ MonoBehaviour:
   prefab: {fileID: 3297527717867382943, guid: 9d5c3f03bfc2cb7459f22821e3c1fb84, type: 3}
   icon: {fileID: 0}
   MaxHp: 50
-  Speed: 5
-  Damage: 5
-  FireRate: 1
+  Speed: 10
+  Damage: 30
+  FireRate: 2
   ProjectileSpeed: 50
-  GoldReward: 50
+  GoldReward: 200

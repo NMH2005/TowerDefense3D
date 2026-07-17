@@ -16,49 +16,49 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: a6458545a5e670647894895d13743839, type: 3}
   prefab: {fileID: 2379259324889334475, guid: f8f00151fec3831439926ae90f3a4a48, type: 3}
   WeaponPrefab: {fileID: 7542761494088080906, guid: b6a416b0f6ffd4c47a9ab620f0fa02c1, type: 3}
-  buyCost: 0
+  buyCost: 100
   levels:
   - enableBase: 1
     enableBottom: 0
     enableMiddle: 0
     enableBuild: 0
     UpgradeCost: 0
-    SellValue: 0
+    SellValue: 50
     MaxHp: 0
-    Damage: 0
-    FireRate: 1
-    Range: 10
-    ProjectileSpeed: 10
+    Damage: 8
+    FireRate: 1.2
+    Range: 12
+    ProjectileSpeed: 20
   - enableBase: 1
     enableBottom: 1
     enableMiddle: 0
     enableBuild: 0
-    UpgradeCost: 0
-    SellValue: 0
+    UpgradeCost: 200
+    SellValue: 100
     MaxHp: 0
-    Damage: 0
-    FireRate: 1
-    Range: 20
-    ProjectileSpeed: 50
+    Damage: 15
+    FireRate: 1.4
+    Range: 15
+    ProjectileSpeed: 20
   - enableBase: 1
     enableBottom: 1
     enableMiddle: 1
     enableBuild: 0
-    UpgradeCost: 0
-    SellValue: 0
+    UpgradeCost: 350
+    SellValue: 175
     MaxHp: 0
-    Damage: 0
-    FireRate: 1
-    Range: 20
-    ProjectileSpeed: 50
+    Damage: 25
+    FireRate: 1.6
+    Range: 18
+    ProjectileSpeed: 20
   - enableBase: 1
     enableBottom: 1
     enableMiddle: 1
     enableBuild: 1
-    UpgradeCost: 0
-    SellValue: 0
+    UpgradeCost: 500
+    SellValue: 250
     MaxHp: 0
-    Damage: 0
-    FireRate: 1
+    Damage: 40
+    FireRate: 2
     Range: 20
-    ProjectileSpeed: 50
+    ProjectileSpeed: 20

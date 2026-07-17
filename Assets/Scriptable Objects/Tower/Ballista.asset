@@ -30,35 +30,35 @@ MonoBehaviour:
     Range: 10
     ProjectileSpeed: 50
   - enableBase: 1
-    enableBottom: 1
+    enableBottom: 0
     enableMiddle: 0
     enableBuild: 0
     UpgradeCost: 100
     SellValue: 50
     MaxHp: 0
-    Damage: 200
-    FireRate: 1
-    Range: 20
+    Damage: 8
+    FireRate: 1.2
+    Range: 12
     ProjectileSpeed: 50
   - enableBase: 1
     enableBottom: 1
     enableMiddle: 1
     enableBuild: 0
-    UpgradeCost: 0
-    SellValue: 0
+    UpgradeCost: 200
+    SellValue: 100
     MaxHp: 0
-    Damage: 0
-    FireRate: 0
-    Range: 30
+    Damage: 15
+    FireRate: 1.4
+    Range: 15
     ProjectileSpeed: 50
   - enableBase: 1
     enableBottom: 1
     enableMiddle: 1
     enableBuild: 1
-    UpgradeCost: 0
+    UpgradeCost: 500
     SellValue: 0
     MaxHp: 0
-    Damage: 0
-    FireRate: 0
-    Range: 40
+    Damage: 30
+    FireRate: 1.8
+    Range: 17
     ProjectileSpeed: 50

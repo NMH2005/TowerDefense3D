@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     public int CurrentHp => currentHp;
     public int Damage => damage;
     private SpawnerManager ownerSpawner;
+    [SerializeField] private EnemyHealthBar healthBar;
 
     public float GetRemainingDistance()
     {

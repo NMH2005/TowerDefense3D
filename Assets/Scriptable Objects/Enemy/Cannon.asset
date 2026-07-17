@@ -15,9 +15,9 @@ MonoBehaviour:
   EnemyName: Cannon
   prefab: {fileID: 6688736684858781804, guid: 637eb17c32480324daabcc6db6f001ce, type: 3}
   icon: {fileID: 0}
-  MaxHp: 20
-  Speed: 5
-  Damage: 5
-  FireRate: 1
+  MaxHp: 30
+  Speed: 7
+  Damage: 20
+  FireRate: 1.5
   ProjectileSpeed: 50
-  GoldReward: 50
+  GoldReward: 150

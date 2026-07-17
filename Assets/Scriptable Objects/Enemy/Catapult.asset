@@ -15,9 +15,9 @@ MonoBehaviour:
   EnemyName: Catapult
   prefab: {fileID: 3820799226601165620, guid: eba1e38041067b74bb4d749328ee9da7, type: 3}
   icon: {fileID: 0}
-  MaxHp: 30
+  MaxHp: 15
   Speed: 5
-  Damage: 4
-  FireRate: 1
-  ProjectileSpeed: 50
-  GoldReward: 50
+  Damage: 20
+  FireRate: 1.2
+  ProjectileSpeed: 20
+  GoldReward: 100

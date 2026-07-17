@@ -45,8 +45,12 @@ public class SpawnerManager : MonoBehaviour {
 
     private int GetEnemiesPerWave()
     {
+        int localWave = WaveManager.Instance.CurrentWave - unlockWave + 1;
+
+        localWave = Mathf.Max(localWave, 1);
+
         int count = startingEnemiesPerWave +
-                    (WaveManager.Instance.CurrentWave - 1) * enemyIncreasePerWave;
+                    (localWave - 1) * enemyIncreasePerWave;
 
         return Mathf.Min(count, maxEnemiesPerWave);
     }

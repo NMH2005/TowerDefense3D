@@ -4,7 +4,8 @@ public class WaveManager : MonoBehaviour {
     public static WaveManager Instance { get; private set; }
     private int finishedSpawnerCount = 0;
     public int CurrentWave { get; private set; } = 1;
-
+    [SerializeField] private int baseWaveReward = 20;
+    [SerializeField] private int rewardIncreasePerWave = 5;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,6 +24,12 @@ public class WaveManager : MonoBehaviour {
 
     public void NextWave()
     {
+        if (EconomyManager.Instance != null)
+        {
+            int reward = baseWaveReward + (CurrentWave - 1) * rewardIncreasePerWave;
+            EconomyManager.Instance.AddGold(reward);
+        }
+
         CurrentWave++;
         EventManager.RaiseWaveChanged(CurrentWave);
     }
