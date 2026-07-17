@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5279347431507200322}
   - component: {fileID: 5298173195577310923}
   m_Layer: 0
-  m_Name: enemy-ufo-b-weapon
+  m_Name: EnemyCatapult
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

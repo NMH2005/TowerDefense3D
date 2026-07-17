@@ -35,32 +35,9 @@ public class EnemyManager : MonoBehaviour, IDamagable {
         currentHp = data.MaxHp;
         damage = data.Damage;
 
-        if (data.prefab != null)
-            SpawnWeapon(data.prefab);
-    }
-
-    private void SpawnWeapon(GameObject weaponPrefab)
-    {
-        Transform place = FindWeaponPlace();
-        Transform parent = place != null ? place : transform;
-
-        weaponInstance = Instantiate(weaponPrefab, parent);
-        weaponInstance.transform.localPosition = Vector3.zero;
-        weaponInstance.transform.localRotation = Quaternion.identity;
-
-        weaponAttack = weaponInstance.GetComponentInChildren<EnemyWeaponAttack>();
+        weaponAttack = GetComponentInChildren<EnemyWeaponAttack>();
         if (weaponAttack != null)
             weaponAttack.ApplyStats(data);
-    }
-
-    private Transform FindWeaponPlace()
-    {
-        foreach (var t in GetComponentsInChildren<Transform>(true))
-        {
-            if (t.name == "WeaponPlace")
-                return t;
-        }
-        return null;
     }
 
     private void Start()
@@ -101,7 +78,8 @@ public class EnemyManager : MonoBehaviour, IDamagable {
     private void StartAttackingBase()
     {
         isAttackingBase = true;
-
+        Vector3 lastWaypointPos = Waypoints.waypoints[Waypoints.waypoints.Length - 1].position;
+        Debug.Log($"[EnemyManager] StartAttackingBase - enemy tại {transform.position}, waypoint cuối tại {lastWaypointPos}, lệch {Vector3.Distance(transform.position, lastWaypointPos):F2}");
         EventManager.RaiseEnemyReachedEnd(this);
 
         if (weaponAttack != null)

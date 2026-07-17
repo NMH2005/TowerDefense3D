@@ -13,6 +13,8 @@ public class EventManager : MonoBehaviour {
     public static event Action<int> OnLivesChanged;
     public static event Action OnGameOver;
     public static event Action<TowersData> OnTowerSelectionChanged;
+    public static event Action<int> OnWaveChanged;
+    public static event Action OnAllWavesCompleted;
 
     public static void RaiseTowerPlaced()
     {
@@ -62,5 +64,15 @@ public class EventManager : MonoBehaviour {
     public static void RaiseTowerSelectionChanged(TowersData data)
     {
         OnTowerSelectionChanged?.Invoke(data);
+    }
+
+    public static void RaiseWaveChanged(int waveNumber)
+    {
+        OnWaveChanged?.Invoke(waveNumber);
+    }
+
+    public static void RaiseAllWavesCompleted()
+    {
+        OnAllWavesCompleted?.Invoke();
     }
 }
