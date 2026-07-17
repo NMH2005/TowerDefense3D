@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1131635760832320496}
   - component: {fileID: 615057389747567327}
   - component: {fileID: 7229955766744347747}
+  - component: {fileID: 8312818273896908058}
   m_Layer: 0
   m_Name: EnemyCannon
   m_TagString: Enemy
@@ -157,8 +158,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6852348641006375158}
   - {fileID: 2993230254227991342}
@@ -233,6 +234,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2770d62d6854ed74a9b992333d6b524c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+--- !u!136 &8312818273896908058
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6688736684858781804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.41
+  m_Height: 0.60853887
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.30426943, z: 0}
 --- !u!1 &7154166569367928861
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 7154166569367928861}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.564, z: 0.244}
+  m_LocalPosition: {x: 0, y: 0.564, z: 0.439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,19 +3,20 @@
 public class SpawnerManager : MonoBehaviour {
     [SerializeField] private EnemyData[] enemies;
     [SerializeField] private float timeInterval = 2f;
-    [SerializeField] private int enemiesPerWave = 10;
     [SerializeField] private int maxSandboxWaves = 20;
     [SerializeField] private int wavesPerTierUnlock = 3;
-
+    [SerializeField] private float hpIncreasePer5Waves = 0.2f;
+    [SerializeField] private int unlockWave = 1;
+    [SerializeField] private Transform[] waypoints;
     private float timer;
     private int enemiesSpawnedInWave = 0;
-    private int currentWave = 1;
+    private int enemiesAlive = 0;
+    private bool waveFinishedSpawning = false;
     private bool spawningStopped = false;
-
-    private void Start()
-    {
-        EventManager.RaiseWaveChanged(currentWave);
-    }
+    [SerializeField] private int startingEnemiesPerWave = 1;
+    [SerializeField] private int enemyIncreasePerWave = 2;
+    [SerializeField] private int maxEnemiesPerWave = 40;
+    public int UnlockWave => unlockWave;
 
     private void OnEnable()
     {
@@ -31,6 +32,9 @@ public class SpawnerManager : MonoBehaviour {
     {
         if (spawningStopped) return;
 
+        if (WaveManager.Instance.CurrentWave < unlockWave)
+            return;
+
         timer += Time.deltaTime;
         if (timer > timeInterval)
         {
@@ -39,45 +43,69 @@ public class SpawnerManager : MonoBehaviour {
         }
     }
 
+    private int GetEnemiesPerWave()
+    {
+        int count = startingEnemiesPerWave +
+                    (WaveManager.Instance.CurrentWave - 1) * enemyIncreasePerWave;
+
+        return Mathf.Min(count, maxEnemiesPerWave);
+    }
+
+    private float GetHpMultiplier()
+    {
+        int bonusTier = (WaveManager.Instance.CurrentWave - 1) / 5;
+        return 1f + bonusTier * hpIncreasePer5Waves;
+    }
+
     private void SpawnEnemy()
     {
+        if (waveFinishedSpawning)
+            return;
+
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 5f);
         EnemyData data = PickEnemyForCurrentWave();
 
         GameObject enemyObj = Instantiate(data.prefab, spawnPos, Quaternion.identity);
         EnemyManager enemyManager = enemyObj.GetComponent<EnemyManager>();
         if (enemyManager != null)
-            enemyManager.Initialize(data);
-
+            enemyManager.Initialize(data, GetHpMultiplier(), waypoints);
         enemiesSpawnedInWave++;
-
-        if (enemiesSpawnedInWave >= enemiesPerWave)
+        enemiesAlive++;
+        if (enemiesSpawnedInWave >= GetEnemiesPerWave())
         {
-            enemiesSpawnedInWave = 0;
-            AdvanceWave();
+            waveFinishedSpawning = true;
         }
     }
 
     private EnemyData PickEnemyForCurrentWave()
     {
-        int unlockedCount = 1 + (currentWave - 1) / wavesPerTierUnlock;
+        int unlockedCount = 1 + (WaveManager.Instance.CurrentWave - 1) / wavesPerTierUnlock;
         unlockedCount = Mathf.Clamp(unlockedCount, 1, enemies.Length);
 
         int randomIndex = Random.Range(0, unlockedCount);
         return enemies[randomIndex];
     }
 
-    private void AdvanceWave()
+    public void OnEnemyDead()
     {
-        if (GameSession.SelectedMode == GameMode.Sandbox && currentWave >= maxSandboxWaves)
-        {
-            spawningStopped = true;
-            EventManager.RaiseAllWavesCompleted();
-            return;
-        }
+        enemiesAlive--;
 
-        currentWave++;
-        EventManager.RaiseWaveChanged(currentWave);
+        if (waveFinishedSpawning && enemiesAlive <= 0)
+        {
+            if (GameSession.SelectedMode == GameMode.Sandbox &&
+    WaveManager.Instance.CurrentWave >= maxSandboxWaves)
+            {
+                spawningStopped = true;
+                EventManager.RaiseAllWavesCompleted();
+                return;
+            }
+
+            WaveManager.Instance.NotifySpawnerFinished();
+
+            enemiesSpawnedInWave = 0;
+            enemiesAlive = 0;
+            waveFinishedSpawning = false;
+        }
     }
 
     private void HandleGameOver()

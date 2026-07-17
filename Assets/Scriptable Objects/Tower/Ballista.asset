@@ -24,8 +24,8 @@ MonoBehaviour:
     enableBuild: 0
     UpgradeCost: 0
     SellValue: 20
-    MaxHp: 100
-    Damage: 50
+    MaxHp: 20
+    Damage: 4
     FireRate: 1
     Range: 10
     ProjectileSpeed: 50

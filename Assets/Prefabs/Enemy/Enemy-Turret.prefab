@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 1471904909530757685}
   - component: {fileID: 9029911434620386466}
   - component: {fileID: 4932205435182861896}
+  - component: {fileID: 5146506827270953280}
   m_Layer: 0
   m_Name: Enemy-Turret
   m_TagString: Enemy
@@ -157,8 +158,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6320022905180987680}
   - {fileID: 129558214971736540}
@@ -233,6 +234,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2770d62d6854ed74a9b992333d6b524c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+--- !u!136 &5146506827270953280
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3297527717867382943}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 0.5225
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.26125, z: 0}
 --- !u!1 &8747870713770490485
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 8747870713770490485}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.611, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0.611, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
